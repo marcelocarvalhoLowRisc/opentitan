@@ -45,26 +45,26 @@ class gpio_random_long_reg_writes_reg_reads_vseq extends gpio_base_vseq;
           `uvm_info(msg_id, $sformatf("drive random value 0x%0h on gpio_i", gpio_i), UVM_LOW)
 
           //Skip if a reset is ongoing...
-          if (!cfg.clk_rst_vif.rst_n) break;
+          if (!cfg.clk_rst_vif.rst_n) return;
           // drive gpio_vif after setting all output enables to 0's
           drive_gpio_in(gpio_i);
 
           //Skip if a reset is ongoing...
-          if (!cfg.clk_rst_vif.rst_n) break;
+          if (!cfg.clk_rst_vif.rst_n) return;
           // Wait for one clock cycle for us to read data_in reg reliably
           cfg.clk_rst_vif.wait_clks(1);
         end
         // long reg write
         1: begin
           //Skip if a reset is ongoing...
-          if (!cfg.clk_rst_vif.rst_n) break;
+          if (!cfg.clk_rst_vif.rst_n) return;
           undrive_gpio_in();
           repeat (num_reg_op) gpio_reg_wr();
         end
         // long reg read
         1: begin
           //Skip if a reset is ongoing...
-          if (!cfg.clk_rst_vif.rst_n) break;
+          if (!cfg.clk_rst_vif.rst_n) return;
           repeat (num_reg_op) gpio_reg_rd();
         end
       endcase

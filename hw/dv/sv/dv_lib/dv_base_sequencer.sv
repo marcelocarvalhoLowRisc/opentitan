@@ -20,6 +20,7 @@ class dv_base_sequencer #(type ITEM_T     = uvm_sequence_item,
 
   CFG_T cfg;
 
+
   `uvm_component_new
 
   function void build_phase(uvm_phase phase);
@@ -27,5 +28,8 @@ class dv_base_sequencer #(type ITEM_T     = uvm_sequence_item,
     if (cfg.has_req_fifo) req_analysis_fifo = new("req_analysis_fifo", this);
     if (cfg.has_rsp_fifo) rsp_analysis_fifo = new("rsp_analysis_fifo", this);
   endfunction : build_phase
+
+
+  
 
 endclass
