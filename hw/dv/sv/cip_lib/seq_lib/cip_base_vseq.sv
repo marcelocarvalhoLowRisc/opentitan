@@ -789,11 +789,6 @@ class cip_base_vseq #(
               end
             end
           join_any
-
-          //if(i == num_times) begin
-          p_sequencer.rnd_rst_started = 1;
-          //end
-
           // If vseq_done is false then we have issued a reset (the second process in the fork) but
           // the vseq that we were racing against hasn't noticed the reset and stopped. Killing that
           // process will cause confusing errors (because there will be some sequence that's waiting
@@ -803,9 +798,6 @@ class cip_base_vseq #(
           // can_reset_with_csr_accesses=1: we expect the vseq to run to completion before the reset
           // signal is de-asserted. To make things easier to debug if it hasn't done, fail in an
           // understandable way here.
-
-          
-          //wait(vseq_done)
           if (cfg.can_reset_with_csr_accesses) `DV_CHECK_FATAL(vseq_done)
 
           `uvm_info(`gfn, $sformatf("\nStress w/ reset is done for run %0d/%0d", i, num_times),

@@ -51,7 +51,7 @@ class gpio_smoke_vseq extends gpio_base_vseq;
 
       //Skip if a reset is ongoing...
       if (!cfg.clk_rst_vif.rst_n) return;
-      cfg.clk_rst_vif.wait_clks(delay);
+      cfg.clk_rst_vif.wait_clks_or_rst(delay);
 
       // Reading data_in will trigger a check inside scoreboard
       csr_rd(.ptr(ral.data_in), .value(csr_rd_val));
@@ -86,7 +86,7 @@ class gpio_smoke_vseq extends gpio_base_vseq;
 
       //Skip if a reset is ongoing...
       if (!cfg.clk_rst_vif.rst_n) return;
-      cfg.clk_rst_vif.wait_clks(delay);
+      cfg.clk_rst_vif.wait_clks_or_rst(delay);
       `uvm_info(msg_id, $sformatf("waiting for %0d clock cycles", delay), UVM_LOW)
     end
   endtask : body

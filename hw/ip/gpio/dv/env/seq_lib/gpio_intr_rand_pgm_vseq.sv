@@ -27,7 +27,7 @@ class gpio_intr_rand_pgm_vseq extends gpio_base_vseq;
       //Skip if a reset is ongoing...
       if (!cfg.clk_rst_vif.rst_n) return;
       `DV_CHECK_MEMBER_RANDOMIZE_FATAL(delay)
-      cfg.clk_rst_vif.wait_clks(delay);
+      cfg.clk_rst_vif.wait_clks_or_rst(delay);
 
 
       randcase
@@ -47,7 +47,7 @@ class gpio_intr_rand_pgm_vseq extends gpio_base_vseq;
 
           //Skip if a reset is ongoing...
           if (!cfg.clk_rst_vif.rst_n) break;
-          cfg.clk_rst_vif.wait_clks(1);
+          cfg.clk_rst_vif.wait_clks_or_rst(1);
 
           //Skip if a reset is ongoing...
           if (!cfg.clk_rst_vif.rst_n) break;
@@ -99,7 +99,7 @@ class gpio_intr_rand_pgm_vseq extends gpio_base_vseq;
         //Skip if a reset is ongoing...
         if (!cfg.clk_rst_vif.rst_n) break;
         `DV_CHECK_MEMBER_RANDOMIZE_FATAL(delay)
-        cfg.clk_rst_vif.wait_clks(delay);
+        cfg.clk_rst_vif.wait_clks_or_rst(delay);
         // read intr_state register
         csr_rd(.ptr(ral.intr_state), .value(reg_rd_data));
       end

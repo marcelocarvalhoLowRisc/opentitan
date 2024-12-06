@@ -31,7 +31,7 @@ class gpio_random_dout_din_vseq extends gpio_base_vseq;
       //Skip if a reset is ongoing...
       if (!cfg.clk_rst_vif.rst_n) return;
       `DV_CHECK_RANDOMIZE_FATAL(this)
-      cfg.clk_rst_vif.wait_clks(delay);
+      cfg.clk_rst_vif.wait_clks_or_rst(delay);
 
       randcase
         // drive new gpio data in
@@ -51,7 +51,7 @@ class gpio_random_dout_din_vseq extends gpio_base_vseq;
 
           //Skip if a reset is ongoing...
           if (!cfg.clk_rst_vif.rst_n) break;
-          cfg.clk_rst_vif.wait_clks(1);
+          cfg.clk_rst_vif.wait_clks_or_rst(1);
 
           //Skip if a reset is ongoing...
           if (!cfg.clk_rst_vif.rst_n) break;
